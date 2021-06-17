@@ -30,7 +30,7 @@ namespace HashTable
             Console.WriteLine(" Value of an incex is =" + findVal);
 
             string Message = "Paranoids are not paranoid because they are paranoid but because they keep putting themselves deliberatetly into paranoid avoiddable situations";
-            string[] separatorStr = goodThought.Split(" ");
+            string[] separatorStr = Message.Split(" ");
             HashMap<int, string> objHashTable = new HashMap<int, string>(separatorStr.Length);
             int keyStr = 0;
             foreach (string word in separatorStr)
