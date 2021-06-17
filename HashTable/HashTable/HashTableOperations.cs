@@ -4,68 +4,73 @@ using System.Text;
 
 namespace HashTable
 {
-
-    internal class Node<T>
+   public class HashMap<K,V>
     {
-        int key;
-        int value;
-        public Node<int> next;
-        private int v;
-
-        Node(int key, int values)
+        public readonly int size;
+        public readonly LinkedList<keyValue<K, V>>[] items;
+        //structure
+        public struct keyValue<K, V>
         {
-            this.key = key;
-            this.value = value;
-            this.next = next;
+            public K key { get; set; }
+            public V value { get; set; }
+        }
+        //constructor
+        public HashMap(int size)
+        {
+            this.size = size;
+            this.items = new LinkedList<keyValue<K, V>>[size];
         }
 
-        public Node(int v)
+        //get linklist
+        protected LinkedList<keyValue<K, V>> getLinkedList(int pos)
         {
-            this.v = v;
-        }
-        public void insert()
-        {
-            Node<int> node = new Node<int>(key);
-
-        }
-    }
-    class HashTableOperations
-    {
-        Node<int>[] keyarray = new Node<int>[11];
-        public void HashFunction()
-        {
-            for (int i = 0; i < 11; i++)
+            LinkedList<keyValue<K, V>> linklist = items[pos];
+            if (linklist == null)
             {
-                Node<int> node = new Node<int>(-1);
-                keyarray[i] = node;
+                linklist = new LinkedList<keyValue<K, V>>();
+                items[pos] = linklist;
             }
-
+            return linklist;
         }
-        public void insert(int key)
+
+        public int getPositionOfArray(K key)
         {
-            Node<int> node = new Node<int>(key);
-            Node<int> temp;
+            int position = key.GetHashCode() % size;  //get hash code
+            return Math.Abs(position);
+        }
 
-            int index = key % 11;
-            temp = keyarray[index];
-
-            if (temp is null)
+        //get value
+        public V getValue(K key)
+        {
+            int position = getPositionOfArray(key);
+            LinkedList<keyValue<K, V>> linklist = getLinkedList(position);
+            foreach (keyValue<K, V> item in linklist)
             {
-                temp = node;
-            }
-            else
-            {
-                while (temp.next!= null)
+                if (item.key.Equals(key))
                 {
-                    temp = temp.next;
+                    return item.value;
                 }
-                temp.next = node;
             }
+            return default;
+        }
 
-        }//end insert
+        public void Add(K key,V value)
+        {
+            int position = getPositionOfArray(key);
+            LinkedList<keyValue<K, V>> linklist = getLinkedList(position);
 
-       
+            keyValue<K, V> item = new keyValue<K, V>()
+            {
+                key = key,
+                value=value
+            };
+            //ready made method add last
+            linklist.AddLast(item);
+        }
+            
+
+
+
 
     }
-
 }

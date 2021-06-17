@@ -6,10 +6,14 @@ namespace HashTable
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-            HashTableOperations objHash = new HashTableOperations();
-            objHash.HashFunction();
-            objHash.insert(1);
+            HashMap<int, string> objHash = new HashTable.HashMap<int, string>(4);
+            objHash.Add(0, "hi");
+            objHash.Add(1, "how");
+            objHash.Add(2, "are");
+            objHash.Add(3, "you");
+            
+            string varGetValue = objHash.getValue(3);
+            Console.WriteLine(" Value of an incex is =" + varGetValue);
         }
     }
 }
