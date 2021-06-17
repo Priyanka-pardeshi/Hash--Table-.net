@@ -86,5 +86,47 @@ namespace HashTable
         }
 
 
+        public int occurance(V value)
+        {
+            int occurance = 0;
+            foreach (LinkedList<keyValue<K,V>> objitem in items)
+            {
+                if (objitem == null)
+                
+                    continue;
+                
+                foreach (keyValue<K, V> itemm in objitem)
+                {
+
+                    if (itemm.value.Equals(value))
+                    {
+                        occurance++;
+                    }
+                }
+            }
+            return occurance;
+        }
+
+        public void RemoveValue(V value)
+        {
+            foreach (LinkedList<keyValue<K, V>> objitem in items)
+            {
+                if (objitem == null)
+
+                    continue;
+
+                foreach (keyValue<K, V> itemm in objitem)
+                {
+
+                    if (itemm.value.Equals(value))
+                    {
+                        Remove(itemm.key);
+                        break;
+                    }
+                }
+            }
+            
+        }
+        
     }
 }
