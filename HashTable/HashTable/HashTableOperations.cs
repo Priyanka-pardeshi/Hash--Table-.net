@@ -67,7 +67,23 @@ namespace HashTable
             //ready made method add last
             linklist.AddLast(item);
         }
-            
+
+        public void Remove(K key)
+        {
+            int position = getPositionOfArray(key);
+            LinkedList<keyValue<K, V>> linklist = getLinkedList(position);
+            bool itemFound = false;
+            keyValue<K, V> found = default(keyValue<K, V>);
+            foreach (keyValue<K, V> item in linklist)
+            {
+                itemFound = true;
+                found = item;
+            }
+            if (itemFound)
+            {
+                linklist.Remove(found);
+            }
+        }
 
 
     }
